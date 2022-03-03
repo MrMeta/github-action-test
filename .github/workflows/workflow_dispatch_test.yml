@@ -17,4 +17,4 @@ jobs:
 
     steps:
       - name: 'echo value'
-        run: echo ${{ github.events.inputs.value }}
+        run: echo ${{ github.events.inputs.value | 'identity' }}
