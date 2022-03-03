@@ -1,8 +1,8 @@
 name: Print inputted value
 
 on:
-  schedule:
-    - cron: 0 0 * * *
+  push:
+    - main
   workflow_dispatch:
     inputs:
       value:
@@ -16,4 +16,4 @@ jobs:
 
     steps:
       - name: 'echo value'
-        run: echo {{ github.events.inputs.value }}
+        run: echo ${{ github.events.inputs.value }}
