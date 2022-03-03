@@ -2,7 +2,8 @@ name: Print inputted value
 
 on:
   push:
-    - main
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       value:
