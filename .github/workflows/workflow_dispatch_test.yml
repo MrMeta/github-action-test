@@ -10,5 +10,10 @@ on:
         default: 'identity'
 
 step:
-  - name: 'echo value'
-    run: echo {{ github.events.inputs.value }}
+  echo:
+    name: Echo value
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'echo value'
+        run: echo {{ github.events.inputs.value }}
