@@ -9,7 +9,7 @@ on:
         description: 'Input any value'
         default: 'identity'
 
-step:
+jobs:
   echo:
     name: Echo value
     runs-on: ubuntu-latest
