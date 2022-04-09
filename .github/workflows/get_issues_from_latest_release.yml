@@ -5,8 +5,10 @@ on:
     inputs:
       repository:
         required: true
+        description: 'MrMeta/fooddiary'
       baseRef:
         required: true
+        description: 'master, main, live ...''
 
 jobs:
   job:
