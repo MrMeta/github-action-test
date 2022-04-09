@@ -1,0 +1,25 @@
+name: Get Issues After Latest Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        required: true
+      baseRef:
+        required: true
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        repository: ${{ github.event.inputs.repository }}
+        ref: ${{ github.event.inputs.baseRef }}
+        token: ${{ secrets.GLOBAL_GITHUB_TOKEN }}
+        path: app
+    - naem: Test
+      working-directory: ../app
+      run: echo `git log --oneline -1`
+
