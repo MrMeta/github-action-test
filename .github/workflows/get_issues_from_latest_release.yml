@@ -19,7 +19,7 @@ jobs:
         ref: ${{ github.event.inputs.baseRef }}
         token: ${{ secrets.GLOBAL_GITHUB_TOKEN }}
         path: app
-    - naem: Test
+    - name: Test
       working-directory: ../app
       run: echo `git log --oneline -1`
 
