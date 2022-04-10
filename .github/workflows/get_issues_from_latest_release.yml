@@ -23,10 +23,17 @@ jobs:
         repository: ${{ github.event.inputs.repository }}
         ref: ${{ github.event.inputs.baseRef }}
         token: ${{ secrets.GLOBAL_GITHUB_TOKEN }}
+        path: target
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
         path: app
     - name: Test
-      working-directory: ../app
+      working-directory: ../target
       run: echo `git log --oneline -1`
+    - name: Test
+      working-directory: ../app
+      run: echo `ls -al`
     - name: input condition test
       run: echo "${{ github.event.inputs.hotfix == 'true' && 'hotfix' }}"
 
