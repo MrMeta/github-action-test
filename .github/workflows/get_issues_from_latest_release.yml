@@ -9,6 +9,9 @@ on:
       baseRef:
         required: true
         description: 'master, main, live ...'
+      hotfix:
+        default: false
+        type: boolean
 
 jobs:
   job:
@@ -24,4 +27,6 @@ jobs:
     - name: Test
       working-directory: ../app
       run: echo `git log --oneline -1`
+    - name: input condition test
+      run: echo "${{ "hotfix"[github.event.inputs.hotfix] }}"
 
