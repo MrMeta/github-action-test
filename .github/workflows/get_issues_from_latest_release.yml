@@ -28,5 +28,5 @@ jobs:
       working-directory: ../app
       run: echo `git log --oneline -1`
     - name: input condition test
-      run: echo "${{ "hotfix"[github.event.inputs.hotfix] }}"
+      run: echo "${{ github.event.inputs.hotfix == true && 'hotfix' }}"
 
