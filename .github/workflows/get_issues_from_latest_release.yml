@@ -10,7 +10,7 @@ on:
         required: true
         description: 'master, main, live ...'
       hotfix:
-        default: false
+        default: true
         type: boolean
 
 jobs:
@@ -28,5 +28,5 @@ jobs:
       working-directory: ../app
       run: echo `git log --oneline -1`
     - name: input condition test
-      run: echo "${{ github.event.inputs.hotfix == true && 'hotfix' }}"
+      run: echo "${{ github.event.inputs.hotfix == 'true' && 'hotfix' }}"
 
