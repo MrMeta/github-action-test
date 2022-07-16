@@ -1,7 +1,8 @@
-name: Add link to docuement PR
+name: Add link to document PR
 
 on:
-  pull_request
+  pull_request:
+    types: [opened]
 
 jobs:
   job:
