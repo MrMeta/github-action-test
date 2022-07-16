@@ -8,9 +8,9 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-    # - name: My first step
-    #   if: ${{ github.event_name == 'pull_request' }}
-    #   run: echo ${{ github.event.number }} && echo ${{ github.event.pull_request.title }}
+    - name: Early exit
+      if: ${{ github.event.action == 'edited' && github.event.changes[title][from] == '' }}
+      run: exit 0
     - name: Match PR title with regex
       uses: actions-ecosystem/action-regex-match@v2
       id: regex-match
@@ -25,11 +25,11 @@ jobs:
       with:
         issue-number: ${{ github.event.number }}
         body: |
-          :scroll: Docs link: https://www.naver.com/${{ steps.regex-match.outputs.group1 }}
+          :scroll: Docs PR link: https://www.naver.com/${{ steps.regex-match.outputs.group1 }}
     - name: Add a info comment
       uses: peter-evans/create-or-update-comment@v2
       if: ${{ steps.regex-match.outputs.match == '' }}
       with:
         issue-number: ${{ github.event.number }}
         body: |
-          JIRA ticket number was not found. :thinking:
+          JIRA ticket number was not found in title. :thinking:
