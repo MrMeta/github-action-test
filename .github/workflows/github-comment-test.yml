@@ -10,4 +10,4 @@ jobs:
     steps:
     - name: My first step
       if: ${{ github.event_name == 'pull_request' }}
-      run: echo This event is a pull request that had an assignee removed.
+      run: echo ${{ github.event.number }} && echo ${{ github.event.pull_request.title }}
