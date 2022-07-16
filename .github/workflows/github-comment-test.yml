@@ -2,7 +2,7 @@ name: Add link to document PR
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, edited]
 
 jobs:
   job:
