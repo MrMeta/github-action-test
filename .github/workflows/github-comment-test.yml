@@ -1,24 +1,20 @@
 name: Add link to document PR
 
 on:
+  workflow_dispatch
   pull_request:
-    types: [opened, edited]
+    types: [opened]
 
 jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-    - name: Early exit
-      if: ${{ github.event.action == 'edited' && github.event.changes.title.from == '' }}
-      run: exit 0
     - name: Match PR title with regex
       uses: actions-ecosystem/action-regex-match@v2
       id: regex-match
       with:
         text: ${{ github.event.pull_request.title }}
         regex: '^(IO-\d+).*$'
-    - name: Next step
-      run: echo ${{ steps.regex-match.outputs.match }} && echo ${{ steps.regex-match.outputs.group1 }}
     - name: Add a link comment
       uses: peter-evans/create-or-update-comment@v2
       if: ${{ steps.regex-match.outputs.match != '' }}
