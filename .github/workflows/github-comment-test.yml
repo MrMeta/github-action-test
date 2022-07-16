@@ -11,3 +11,8 @@ jobs:
     - name: My first step
       if: ${{ github.event_name == 'pull_request' }}
       run: echo ${{ github.event.number }} && echo ${{ github.event.pull_request.title }}
+    - name: Create comment
+      uses: peter-evans/create-or-update-comment@v2
+      with:
+        issue-number: ${{ github.event.number }}
+        body: hehe :scroll:
