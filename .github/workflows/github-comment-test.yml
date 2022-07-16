@@ -1,0 +1,11 @@
+name: Add link to docuement PR
+
+on:
+  pull_request
+
+jobs:
+  job:
+    steps:
+    - name: My first step
+      if: ${{ github.event_name == 'pull_request' }}
+      run: echo This event is a pull request that had an assignee removed.
