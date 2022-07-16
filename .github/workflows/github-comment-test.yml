@@ -8,10 +8,18 @@ jobs:
   job:
     runs-on: ubuntu-latest
     steps:
-    - name: My first step
-      if: ${{ github.event_name == 'pull_request' }}
-      run: echo ${{ github.event.number }} && echo ${{ github.event.pull_request.title }}
-    - name: Create comment
+    # - name: My first step
+    #   if: ${{ github.event_name == 'pull_request' }}
+    #   run: echo ${{ github.event.number }} && echo ${{ github.event.pull_request.title }}
+    - name: Match PR title with regex
+      uses: actions-ecosystem/action-regex-match@v2
+      id: regex-match
+      with:
+        text: ${{ github.event.pull_request.title }}
+        regex: '^(IO-\d+)*$'
+    - name: Next step
+      run: echo ${{ steps.regex-match.outputs.match }} && echo ${{ steps.regex-match.outputs.group1 }}
+    - name: Add comment to PR
       uses: peter-evans/create-or-update-comment@v2
       with:
         issue-number: ${{ github.event.number }}
