@@ -19,9 +19,17 @@ jobs:
         regex: '^(IO-\d+).*$'
     - name: Next step
       run: echo ${{ steps.regex-match.outputs.match }} && echo ${{ steps.regex-match.outputs.group1 }}
-    - name: Add comment to PR
+    - name: Add a link comment
       uses: peter-evans/create-or-update-comment@v2
+      if: ${{ steps.regex-match.outputs.match != '' }}
       with:
         issue-number: ${{ github.event.number }}
         body: |
-          hehe :scroll:
+          :scroll: Docs link: https://www.naver.com/${{ steps.regex-match.outputs.group1 }}
+    - name: Add a info comment
+      uses: peter-evans/create-or-update-comment@v2
+      if: ${{ steps.regex-match.outputs.match == '' }}
+      with:
+        issue-number: ${{ github.event.number }}
+        body: |
+          JIRA ticket number was not found. :thinking:
