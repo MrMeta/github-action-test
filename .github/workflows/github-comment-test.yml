@@ -15,4 +15,5 @@ jobs:
       uses: peter-evans/create-or-update-comment@v2
       with:
         issue-number: ${{ github.event.number }}
-        body: hehe :scroll:
+        body: |
+          hehe :scroll:
